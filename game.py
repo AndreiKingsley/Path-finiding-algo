@@ -1,5 +1,4 @@
 from gui import *
-from spot import Spot
 from open import OpenGame
 from closed import ClosedGame
 
