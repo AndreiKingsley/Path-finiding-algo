@@ -1,8 +1,8 @@
 import pygame
 
-from util import *
-from grid import GridGame
-from spot import Spot
+from src.util import *
+from src.grid import GridGame
+from src.spot import Spot
 
 
 class GUI:

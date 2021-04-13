@@ -1,6 +1,6 @@
-from gui import *
-from open import OpenGame
-from closed import ClosedGame
+from src.gui import *
+from src.open import OpenGame
+from src.closed import ClosedGame
 
 import pygame
 
@@ -18,7 +18,7 @@ def reconstruct_path(v):
     gui.draw()
 
 
-def start_game(algorithm, your_open, your_closed, h, rows_number=50, cols_number=50, width=1200, height=800):
+def start_game(algorithm, your_open, your_closed, h, rows_number=40, cols_number=40, width=800, height=800):
     run = True
     size = (width, height)
     grid_size = (rows_number, cols_number)

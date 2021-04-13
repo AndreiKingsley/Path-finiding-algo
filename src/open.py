@@ -1,4 +1,4 @@
-from gui import gui
+from src.gui import gui
 
 
 class OpenBase:
