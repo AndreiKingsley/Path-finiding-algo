@@ -31,15 +31,15 @@ class OpenGame(OpenBase):
     def __iter__(self):
         return self.open.__iter__()
 
-    def isEmpty(self):
-        return self.open.isEmpty()
+    def is_empty(self):
+        return self.open.is_empty()
 
-    def AddNode(self, item):
+    def add_node(self, item):
         spot = gui.get_spot(item.i, item.j)
         if not spot.is_start() and not spot.is_end():
             spot.make_open()
         gui.draw()
-        return self.open.AddNode(item)
+        return self.open.add_node(item)
 
-    def GetBestNode(self):
-        return self.open.GetBestNode()
+    def get_best_node(self):
+        return self.open.get_best_node()

@@ -29,6 +29,6 @@ class GridGame:
             for j in range(self.height):
                 self.update_spot(self.grid[i][j])
 
-    def GetNeighbors(self, i, j):
+    def get_neighbors(self, i, j):
         return map(lambda spot: (spot.i, spot.j), self.grid[i][j].neighbors)
 
