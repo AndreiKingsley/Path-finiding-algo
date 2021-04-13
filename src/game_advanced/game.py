@@ -2,7 +2,9 @@ from src.game_advanced.gui import *
 from src.game_advanced.open import OpenGame
 from src.game_advanced.closed import ClosedGame
 from src.game_advanced.vision import *
-
+import pygame_menu
+from pygame_menu.examples import create_example_window
+import time
 import pygame
 
 
@@ -14,7 +16,6 @@ def reconstruct_path(v):
         v = v.parent
     return ans[::-1]
 
-
 def start_game(algorithm, your_open, your_closed, h, rows_number=40, cols_number=40, width=800, height=800, vision=3):
     run = True
     size = (width, height)
@@ -22,12 +23,18 @@ def start_game(algorithm, your_open, your_closed, h, rows_number=40, cols_number
     gui.start(size=size, grid_size=grid_size)
     start = None
     end = None
+    found_path = None
     while run:
-        gui.draw()
+        if found_path is not None:
+            gui.draw(current=start_pos, path=found_path)
+        else:
+            gui.draw()
         for event in gui.get_events():
             if event.type == pygame.QUIT or event.type == pygame.K_ESCAPE:
                 run = False
-            if pygame.mouse.get_pressed()[0]:  # LEFT CLICK
+            if pygame.mouse.get_pressed()[0] and (gui.is_help_button_pos(pygame.mouse.get_pos()) or gui.is_legend_close_button_pos(pygame.mouse.get_pos())):
+                gui.switch_legend()
+            elif pygame.mouse.get_pressed()[0]:  # LEFT CLICK
                 pos = pygame.mouse.get_pos()
                 row, col = gui.get_clicked_pos(pos)
                 spot = gui.get_spot(row, col)
@@ -51,11 +58,13 @@ def start_game(algorithm, your_open, your_closed, h, rows_number=40, cols_number
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE and start and end:
+                    found_path = None
                     gui.update_grid()
                     start_pos = (start.i, start.j)
                     gui.draw(current=start_pos)
                     end_pos = (end.i, end.j)
                     cur = start_pos
+                    res_path = [cur]
                     while cur != end_pos:
                         make_visible(gui.get_grid(), cur, vision)
                         gui.update_grid_with_vision()
@@ -67,10 +76,26 @@ def start_game(algorithm, your_open, your_closed, h, rows_number=40, cols_number
                         if ((spot.i, spot.j) != start) and ((spot.i, spot.j) != end):
                             pass
                         gui.draw(current=cur, path=path)
+                        time.sleep(0.03)
                         cur = path[0]
+                        res_path += [cur]
+                        if cur == end_pos:
+                            s = dict()
+                            found_path = []
+                            in_cycle = [False] * len(res_path)
+                            for i, c in enumerate(res_path):
+                                if c in s.keys():
+                                    for j in range(s[c], i):
+                                        in_cycle[j] = True
+                                s[c] = i
+                            for n, b in zip(res_path, in_cycle):
+                                if not b:
+                                    found_path += [n]
+                    
 
                 if event.key == pygame.K_r:
                     start = None
                     end = None
+                    found_path = None
                     gui.reset(size, grid_size)
     gui.quit()
