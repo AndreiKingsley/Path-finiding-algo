@@ -1,3 +1,5 @@
+import time
+
 from src.game_advanced.gui import *
 from src.game_advanced.open import OpenGame
 from src.game_advanced.closed import ClosedGame
@@ -68,6 +70,7 @@ def start_game(algorithm, your_open, your_closed, h, rows_number=40, cols_number
                             pass
                         gui.draw(current=cur, path=path)
                         cur = path[0]
+                        time.sleep(0.1)
 
                 if event.key == pygame.K_r:
                     start = None

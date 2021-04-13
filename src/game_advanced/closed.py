@@ -1,5 +1,10 @@
 import time
 
+import pygame
+
+from src.game_advanced.gui import gui
+
+
 class ClosedBase:
     def __init__(self):
         pass
@@ -28,7 +33,6 @@ class ClosedGame(ClosedBase):
         return self.closed.__len__()
 
     def add_node(self, item, *args):
-        time.sleep(0.0005)
         return self.closed.add_node(item, args)
 
     def was_expanded(self, item, *args):
