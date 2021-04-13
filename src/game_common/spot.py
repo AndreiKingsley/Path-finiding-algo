@@ -1,4 +1,4 @@
-from src.util import *
+from src.game_common.util import *
 
 
 class Spot:

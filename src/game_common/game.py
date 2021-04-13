@@ -1,6 +1,6 @@
-from src.gui import *
-from src.open import OpenGame
-from src.closed import ClosedGame
+from src.game_common.gui import *
+from src.game_common.open import OpenGame
+from src.game_common.closed import ClosedGame
 
 import pygame
 

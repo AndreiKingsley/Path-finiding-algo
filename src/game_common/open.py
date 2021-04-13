@@ -1,4 +1,4 @@
-from src.gui import gui
+from src.game_common.gui import gui
 
 
 class OpenBase:
@@ -11,13 +11,13 @@ class OpenBase:
     def __iter__(self):
         pass
 
-    def isEmpty(self):
+    def is_empty(self):
         pass
 
-    def AddNode(self, item):
+    def add_node(self, item):
         pass
 
-    def GetBestNode(self):
+    def get_best_node(self):
         pass
 
 

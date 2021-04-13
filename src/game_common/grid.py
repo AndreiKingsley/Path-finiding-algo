@@ -1,4 +1,4 @@
-from src.spot import Spot
+from src.game_common.spot import Spot
 
 
 class GridGame:
