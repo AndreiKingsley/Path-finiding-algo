@@ -1,3 +1,10 @@
+import time
+
+import pygame
+
+from src.game_advanced.gui import gui
+
+
 class ClosedBase:
     def __init__(self):
         pass

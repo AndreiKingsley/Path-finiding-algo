@@ -1,3 +1,5 @@
+import time
+
 from src.game_advanced.gui import *
 from src.game_advanced.open import OpenGame
 from src.game_advanced.closed import ClosedGame
