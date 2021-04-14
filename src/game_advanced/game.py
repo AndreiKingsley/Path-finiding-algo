@@ -26,6 +26,7 @@ def start_game(algorithm, your_open, your_closed, h, rows_number=40, cols_number
     start = None
     end = None
     found_path = None
+    path_len = None
     while run:
         if found_path is not None:
             gui.draw(current=start_pos, path=found_path)
@@ -34,8 +35,10 @@ def start_game(algorithm, your_open, your_closed, h, rows_number=40, cols_number
         for event in gui.get_events():
             if event.type == pygame.QUIT or event.type == pygame.K_ESCAPE:
                 run = False
-            if pygame.mouse.get_pressed()[0] and (gui.is_help_button_pos(pygame.mouse.get_pos()) or gui.is_legend_close_button_pos(pygame.mouse.get_pos())):
+            if pygame.mouse.get_pressed()[0] and gui.is_help_button_pos(pygame.mouse.get_pos()):
                 gui.switch_legend()
+            elif pygame.mouse.get_pressed()[0] and gui.is_stats_button_pos(pygame.mouse.get_pos()):
+                gui.switch_stats(path_len)
             elif pygame.mouse.get_pressed()[0]:  # LEFT CLICK
                 pos = pygame.mouse.get_pos()
                 row, col = gui.get_clicked_pos(pos)
@@ -70,7 +73,7 @@ def start_game(algorithm, your_open, your_closed, h, rows_number=40, cols_number
                     while cur != end_pos:
                         make_visible(gui.get_grid(), cur, vision)
                         gui.update_grid_with_vision()
-                        found_flag, last_v = algorithm(gui.get_grid(), cur, end_pos, OpenGame(your_open), ClosedGame(your_closed), h)
+                        found_flag, last_v, Open, Closed = algorithm(gui.get_grid(), cur, end_pos, OpenGame(your_open), ClosedGame(your_closed), h)
                         if not found_flag:
                             break
                         path = reconstruct_path(last_v)
@@ -93,6 +96,7 @@ def start_game(algorithm, your_open, your_closed, h, rows_number=40, cols_number
                             for n, b in zip(res_path, in_cycle):
                                 if not b:
                                     found_path += [n]
+                            path_len = len(found_path)
                     
 
                 if event.key == pygame.K_r:
