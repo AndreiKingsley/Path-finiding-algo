@@ -4,8 +4,6 @@ from src.game_advanced.gui import *
 from src.game_advanced.open import OpenGame
 from src.game_advanced.closed import ClosedGame
 from src.game_advanced.vision import *
-import pygame_menu
-from pygame_menu.examples import create_example_window
 import time
 import pygame
 
@@ -73,7 +71,9 @@ def start_game(algorithm, your_open, your_closed, h, rows_number=40, cols_number
                     while cur != end_pos:
                         make_visible(gui.get_grid(), cur, vision)
                         gui.update_grid_with_vision()
-                        found_flag, last_v, Open, Closed = algorithm(gui.get_grid(), cur, end_pos, OpenGame(your_open), ClosedGame(your_closed), h)
+                        Open = OpenGame(your_open)
+                        Closed = ClosedGame(your_closed)
+                        found_flag, last_v, Open, Closed = algorithm(gui.get_grid(), cur, end_pos, Open, Closed, h)
                         if not found_flag:
                             break
                         path = reconstruct_path(last_v)

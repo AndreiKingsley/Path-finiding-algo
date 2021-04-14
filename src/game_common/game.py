@@ -68,7 +68,9 @@ def start_game(algorithm, your_open, your_closed, h, rows_number=40, cols_number
                     gui.update_grid()
                     start_pos = (start.i, start.j)
                     end_pos = (end.i, end.j)
-                    found_flag, last_v, Open, Closed = algorithm(gui.get_grid(), start_pos, end_pos, OpenGame(your_open), ClosedGame(your_closed), h)
+                    Open = OpenGame(your_open)
+                    Closed = ClosedGame(your_closed)
+                    found_flag, last_v = algorithm(gui.get_grid(), start_pos, end_pos, Open, Closed, h)
                     if found_flag:
                         path = reconstruct_path(last_v)
                         path_len = len(path)
