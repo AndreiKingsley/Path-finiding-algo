@@ -26,10 +26,7 @@ def start_game(algorithm, your_open, your_closed, h, rows_number=40, cols_number
     found_path = None
     path_len = None
     while run:
-        if found_path is not None:
-            gui.draw(current=start_pos, path=found_path)
-        else:
-            gui.draw()
+        gui.draw()
         for event in gui.get_events():
             if event.type == pygame.QUIT or event.type == pygame.K_ESCAPE:
                 run = False
