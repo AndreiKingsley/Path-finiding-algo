@@ -73,7 +73,7 @@ def start_game(algorithm, your_open, your_closed, h, rows_number=40, cols_number
                         gui.update_grid_with_vision()
                         Open = OpenGame(your_open)
                         Closed = ClosedGame(your_closed)
-                        found_flag, last_v, Open, Closed = algorithm(gui.get_grid(), cur, end_pos, Open, Closed, h)
+                        found_flag, last_v = algorithm(gui.get_grid(), cur, end_pos, Open, Closed, h)
                         if not found_flag:
                             break
                         path = reconstruct_path(last_v)
