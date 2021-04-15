@@ -12,10 +12,10 @@ class ClosedBase:
     def __len__(self):
         pass
 
-    def add_node(self, item, *args):
+    def add_node(self, item):
         pass
 
-    def was_expanded(self, item, *args):
+    def was_expanded(self, item):
         pass
 
 
@@ -29,7 +29,7 @@ class ClosedGame(ClosedBase):
     def __len__(self):
         return self.closed.__len__()
 
-    def add_node(self, item, *args):
+    def add_node(self, item):
         spot = gui.get_spot(item.i, item.j)
         if not spot.is_start() and not spot.is_end():
             spot.make_closed()
@@ -37,7 +37,7 @@ class ClosedGame(ClosedBase):
         for event in gui.get_events():
             if event == QUIT:
                 gui.quit()
-        return self.closed.add_node(item, args)
+        return self.closed.add_node(item)
 
     def was_expanded(self, item, *args):
-        return self.closed.was_expanded(item, args)
+        return self.closed.was_expanded(item)
